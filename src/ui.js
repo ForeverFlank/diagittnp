@@ -1,8 +1,8 @@
 // https://www.w3schools.com/howto/howto_js_tabs.asp
-function openTab(id) {
+function openTab(id, className = "tabcontent") {
     var i, tabcontent;
 
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = document.getElementsByClassName(className);
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
