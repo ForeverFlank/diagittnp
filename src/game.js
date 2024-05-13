@@ -5,20 +5,25 @@ class Game {
         this.doubleAmount = new Decimal(2);
         this.maxThings = new Decimal(1);
         this.lastDouble = 0;
-
-        this.takeTotal = new Decimal(1);
-        this.takeValue = new Decimal(1);
-
         this.thingsUpgrade = {
             levels: [0, 0].map((x) => new Decimal(x)),
             cost: [1000, 1e5].map((x) => new Decimal(x)),
             costStep: [10, 1e5].map((x) => new Decimal(x)),
         };
-
         this.shops = {
             upgrades: [false, false, false, false],
             cost: [1e40, 1e80, 1e150, "1e330"].map((x) => new Decimal(x)),
         };
+
+        this.takes = new Decimal(0);
+        this.takeTotal = new Decimal(1);
+        this.takeValue = new Decimal(1);
+        this.tokens = new Decimal(0);
+        this.tokenShops = {
+            upgrades: [false, false, false, false],
+            cost: [3, 6, 10, 30, 100].map((x) => new Decimal(x)),
+        }
+
 
         this.uiStates = {
             buttonTakeFaded: false,
@@ -77,6 +82,9 @@ class Game {
         this.doubleCooldown = 1000;
         this.thingsUpgrade.levels = [0, 0].map((x) => new Decimal(x));
         this.shops.upgrades = [false, false, false, false];
+
+        this.takes = this.takes.add(1);
+        this.tokens = this.tokens.add(1);
     }
     thingsUpgradeFinalCost(n) {
         return this.thingsUpgrade.cost[n].mul(

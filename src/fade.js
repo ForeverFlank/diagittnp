@@ -1,25 +1,21 @@
-function fadeIn(id, duration = 2000, display = 'block') {
+function fadeIn(id, duration = 2000, display = "block") {
     document.getElementById(id).style.display = display;
-    document.getElementById(id).animate(
-        [
-            { opacity: '0' },
-            { opacity: '1' }
-        ],
-        { duration: duration, iterations: 1 });
+    document.getElementById(id).animate([{ opacity: "0" }, { opacity: "1" }], {
+        duration: duration,
+        iterations: 1,
+    });
 }
 function fadeOut(id, duration = 2000) {
-    document.getElementById(id).animate(
-        [
-            { opacity: '1' },
-            { opacity: '0' }
-        ],
-        { duration: duration, iterations: 1 });
+    document.getElementById(id).animate([{ opacity: "1" }, { opacity: "0" }], {
+        duration: duration,
+        iterations: 1,
+    });
     setTimeout(function () {
-        document.getElementById(id).style.display = 'none'
+        document.getElementById(id).style.display = "none";
     }, duration);
 }
 
-Game.prototype.renderFadeElements = function() {
+Game.prototype.renderFadeElements = function () {
     if (this.shops.upgrades[3] && !this.uiStates.buttonTakeFaded) {
         fadeIn("button-take", 2000, "block");
         this.uiStates.buttonTakeFaded = true;
@@ -28,7 +24,12 @@ Game.prototype.renderFadeElements = function() {
         this.uiStates.buttonTakeFaded = false;
     }
 
-    if (this.doubles.cmp(5) >= 0 && !this.uiStates.menuThingsUpgradeFaded) {
+    if (this.takes.cmp(3) >= 0) {
+        document.getElementById("menu-things-upgrade").style.display = "grid";
+    } else if (
+        this.doubles.cmp(5) >= 0 &&
+        !this.uiStates.menuThingsUpgradeFaded
+    ) {
         fadeIn("menu-things-upgrade", 2000, "grid");
         this.uiStates.menuThingsUpgradeFaded = true;
     } else if (this.doubles.cmp(5) < 0) {
@@ -36,7 +37,9 @@ Game.prototype.renderFadeElements = function() {
         this.uiStates.menuThingsUpgradeFaded = false;
     }
 
-    if (this.doubles.cmp(50) >= 0 && !this.uiStates.menuShopFaded) {
+    if (this.takes.cmp(3) >= 0) {
+        document.getElementById("menu-shop").style.display = "grid";
+    } else if (this.doubles.cmp(50) >= 0 && !this.uiStates.menuShopFaded) {
         fadeIn("menu-shop", 2000, "grid");
         this.uiStates.menuShopFaded = true;
     } else if (this.doubles.cmp(50) < 0) {
@@ -53,4 +56,4 @@ Game.prototype.renderFadeElements = function() {
         document.getElementById("menu-shop-locked").style.display = "block";
         this.uiStates.menuShopGridFaded = false;
     }
-}
+};

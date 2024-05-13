@@ -42,14 +42,14 @@
 
     <div id="tab-game" class="tabcontent-main text-center mx-auto max-w-lg px-6">
         <hr class="h-0.5 mt-4 mb-2 bg-zinc-300 border-0">
-        <!--div class="flex gap-x-2 *:flex-1 *:p-1 *:border *:rounded *:shadow-lg">
-            <button class="border-blue-600 text-blue-600">Things</button>
-            <button class="border-green-600 text-green-600">Tokens</button>
-        </div-->
+        <div class="flex gap-x-2 *:flex-1 *:p-1 *:border *:rounded *:shadow-lg">
+            <button class="bg-blue-50 border-blue-600 text-blue-600" onclick="openTab('tab-game-things', 'tabcontent-game')">Things</button>
+            <button class="bg-green-50 border-green-600 text-green-600" onclick="openTab('tab-game-tokens', 'tabcontent-game')">Tokens</button>
+        </div>
 
         <div id="tab-game-things" class="tabcontent-game">
             <div class="flex flex-col gap-y-2 my-2">
-                <button class="p-2 bg-white border border-blue-600 text-blue-600 rounded shadow-lg"
+                <button class="p-2 bg-blue-50 border border-blue-600 text-blue-600 rounded shadow-lg"
                     onclick="game.double()">Double It (<span id="amount-double">2</span>x)</button>
                 <div class="h-2 bg-zinc-300 rounded-md">
                     <div id="double-cooldown" class="h-2 bg-blue-600 rounded-md"></div>
@@ -57,8 +57,8 @@
             </div>
 
             <div id="menu-things-upgrade" class="grid grid-cols-2 gap-1 my-4
-            *:h-28 *:border *:border-blue-600 *:text-blue-600 *:font-semibold *:rounded *:shadow-lg *:text-xs *:p-1
-            [&>*:disabled]:border-zinc-500 [&>*:disabled]:text-zinc-500">
+            *:h-28 *:border *:bg-blue-50 *:border-blue-600 *:text-blue-600 *:font-semibold *:rounded *:shadow-lg *:text-xs *:p-1
+            [&>*:disabled]:bg-white [&>*:disabled]:border-zinc-500 [&>*:disabled]:text-zinc-500">
                 <button id="button-things-upgrade-0" onclick="game.thingsBuyUpgrade(0)">Every second, gain +1% of what
                     you would get if you double
                     <br><span class="font-normal">Now:
@@ -86,8 +86,8 @@
                         (<span id="amount-clicks-shop">0</span>/100 clicks required)</span></p>
                 <p id="menu-shop-locked" class="font-bold text-zinc-400 text-lg tracking-wide">[LOCKED]</p>
                 <div id="menu-shop-grid" class="hidden grid-cols-2 gap-1 my-6
-                *:h-24 *:border *:border-blue-600 *:text-blue-600 *:font-semibold *:rounded *:shadow-lg *:text-xs *:p-1
-                [&>*:disabled]:border-zinc-500 [&>*:disabled]:text-zinc-500">
+                *:h-28 *:border *:bg-blue-50 *:border-blue-600 *:text-blue-600 *:font-semibold *:rounded *:shadow-lg *:text-xs *:p-1
+            [&>*:disabled]:bg-white [&>*:disabled]:border-zinc-500 [&>*:disabled]:text-zinc-500">
                     <button id="button-shop-0" onclick="game.shopsBuyUpgrade(0)">Gain additional 0.1x things every time
                         you
                         double
@@ -113,6 +113,12 @@
                 </div>
             </div>
         </div>
+
+        <div id="tab-game-tokens" class="tabcontent-game">
+            <p class="text-lg my-4">You have <span id="amount-tokens" class="font-semibold text-green-600">0</span> tokens </p>
+            <p class="my-4">Token Shop</p>
+        </div>
+
         <p class="opacity-0 leading-[70vw]"><br>placeholder</p>
     </div>
 
@@ -140,6 +146,7 @@
 <script src="src/break_eternity.min.js"></script>
 <script src="src/number-formatting.js"></script>
 <script src="src/game.js"></script>
+<script src="src/tokens.js"></script>
 <script src="src/fade.js"></script>
 <script src="src/ui.js"></script>
 <script src="src/achievements.js"></script>

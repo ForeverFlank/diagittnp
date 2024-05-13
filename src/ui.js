@@ -9,7 +9,8 @@ function openTab(id, className = "tabcontent") {
 
     document.getElementById(id).style.display = "block";
 }
-openTab("tab-game");
+openTab("tab-game", "tabcontent-main");
+openTab("tab-game-things", "tabcontent-game");
 // openTab("tab-achievements");
 
 Game.prototype.disableThingsUpgradeButtons = function () {
@@ -41,6 +42,8 @@ Game.prototype.renderAmounts = function () {
     document.getElementById("amount-clicks-shop").innerHTML = format(
         this.doubles
     );
+
+    document.getElementById("amount-tokens").innerHTML = format(this.tokens);
 };
 
 Game.prototype.render = function () {

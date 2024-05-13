@@ -4,9 +4,14 @@ Game.prototype.saveGame = function () {
         doubles: this.doubles,
         maxThings: this.maxThings,
         lastDouble: this.lastDouble,
+
+        takes: this.takes,
         takeTotal: this.takeTotal,
+        tokens: this.tokens,
+
         thingsUpgrade: { levels: this.thingsUpgrade.levels },
         shops: { upgrades: this.shops.upgrades },
+
         doubleCooldown: this.doubleCooldown,
         achievements: Array.from(this.achievements),
     };
@@ -30,8 +35,15 @@ Game.prototype.loadGame = function () {
     if (parsedData && parsedData.doubles) {
         parsedData.doubles = new Decimal(parsedData.doubles);
     }
+
+    if (parsedData && parsedData.takes) {
+        parsedData.takes = new Decimal(parsedData.takes);
+    }
     if (parsedData && parsedData.takeTotal) {
         parsedData.takeTotal = new Decimal(parsedData.takeTotal);
+    }
+    if (parsedData && parsedData.tokens) {
+        parsedData.tokens = new Decimal(parsedData.tokens);
     }
 
     if (parsedData && parsedData.thingsUpgrade) {
