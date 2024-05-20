@@ -13,7 +13,7 @@ openTab("tab-game", "tabcontent-main");
 openTab("tab-game-things", "tabcontent-game");
 // openTab("tab-achievements");
 
-Game.prototype.disableThingsUpgradeButtons = function () {
+Game.prototype.disableButtons = function () {
     for (let i = 0; i < 2; i++) {
         document.getElementById("button-things-upgrade-" + i).disabled =
             !this.thingsCanBuyUpgrade(i);
@@ -24,6 +24,14 @@ Game.prototype.disableThingsUpgradeButtons = function () {
     }
     document.getElementById("button-take").disabled =
         this.things.cmp("1e500") < 0;
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 3; j++) {
+            document.getElementById(
+                "button-tokens-shop-" + i + "-" + j
+            ).disabled = !this.tokensShopCanBuyUpgrade(i, j);
+        }
+    }
 };
 
 Game.prototype.renderAmounts = function () {
@@ -49,7 +57,7 @@ Game.prototype.renderAmounts = function () {
 Game.prototype.render = function () {
     this.renderFadeElements();
     this.renderAmounts();
-    this.disableThingsUpgradeButtons();
+    this.disableButtons();
 
     document.getElementById("double-cooldown").style.width =
         Math.min(
@@ -74,7 +82,15 @@ Game.prototype.render = function () {
 
     for (let i = 0; i < 4; i++) {
         document.getElementById("cost-shop-" + i).innerHTML =
-            format(this.shops.cost[i]) +
-            (this.shops.upgrades[i] ? " (Purchased)" : "");
+            format(this.shop.cost[i]) +
+            (this.shop.upgrades[i] ? " (Purchased)" : "");
+    }
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 3; j++) {
+            document.getElementById(
+                "cost-tokens-shop-" + i + "-" + j
+            ).innerHTML = format(this.tokensShop.cost[i][j]);
+        }
     }
 };

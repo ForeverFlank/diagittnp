@@ -10,7 +10,8 @@ Game.prototype.saveGame = function () {
         tokens: this.tokens,
 
         thingsUpgrade: { levels: this.thingsUpgrade.levels },
-        shops: { upgrades: this.shops.upgrades },
+        shop: { upgrades: this.shop.upgrades },
+        tokensShop: { upgrades: this.tokensShop.upgrades },
 
         doubleCooldown: this.doubleCooldown,
         achievements: Array.from(this.achievements),
@@ -59,14 +60,14 @@ Game.prototype.loadGame = function () {
         });
     }
 
-    if (parsedData && parsedData.shops) {
-        Object.keys(parsedData.shops).forEach((key) => {
+    if (parsedData && parsedData.shop) {
+        Object.keys(parsedData.shop).forEach((key) => {
             if (
                 key !== "upgrades" &&
-                parsedData.shops[key] &&
-                Array.isArray(parsedData.shops[key])
+                parsedData.shop[key] &&
+                Array.isArray(parsedData.shop[key])
             ) {
-                parsedData.shops[key] = parsedData.shops[key].map(
+                parsedData.shop[key] = parsedData.shop[key].map(
                     (x) => new Decimal(x)
                 );
             }

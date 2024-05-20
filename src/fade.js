@@ -16,10 +16,12 @@ function fadeOut(id, duration = 2000) {
 }
 
 Game.prototype.renderFadeElements = function () {
-    if (this.shops.upgrades[3] && !this.uiStates.buttonTakeFaded) {
+    if (this.takes.cmp(3) >= 0) {
+        document.getElementById("button-take").style.display = "block";
+    } else if (this.shop.upgrades[3] && !this.uiStates.buttonTakeFaded) {
         fadeIn("button-take", 2000, "block");
         this.uiStates.buttonTakeFaded = true;
-    } else if (!this.shops.upgrades[3]) {
+    } else if (!this.shop.upgrades[3]) {
         document.getElementById("button-take").style.display = "none";
         this.uiStates.buttonTakeFaded = false;
     }
@@ -47,7 +49,10 @@ Game.prototype.renderFadeElements = function () {
         this.uiStates.menuShopFaded = false;
     }
 
-    if (this.doubles.cmp(100) >= 0 && !this.uiStates.menuShopGridFaded) {
+    if (this.tokensShop.upgrades[1][0]) {
+        document.getElementById("menu-shop-grid").style.display = "grid";
+        document.getElementById("menu-shop-locked").style.display = "none";
+    } else if (this.doubles.cmp(100) >= 0 && !this.uiStates.menuShopGridFaded) {
         fadeIn("menu-shop-grid", 2000, "grid");
         document.getElementById("menu-shop-locked").style.display = "none";
         this.uiStates.menuShopGridFaded = true;

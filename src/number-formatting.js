@@ -22,20 +22,37 @@ function format(num, decimal = 2, smallDecimal = false) {
         let d = Math.floor(num.mag);
         if (mag.toFixed(2) == "10.00") mag /= 10;
         return (
-            mag.toFixed(decimal) + " x 10" + "<sup>" + comma(d.toString()) + "</sup>"
+            mag.toFixed(decimal) +
+            " x 10" +
+            "<sup>" +
+            comma(d.toString()) +
+            "</sup>"
         );
     }
-    if (num.layer < 3) {
+    if (num.layer <= 1) {
+        let layer = num.layer;
         let str = "";
         let mag = Math.log10(num.mag);
-        for (let l = 0; l <= num.layer; l++) {
+        if (mag >= 10) {
+            layer++;
+            mag = Math.log10(mag);
+        }
+        for (let l = 0; l <= layer; l++) {
             str += "10<sup>";
         }
-        str += mag.toFixed(1);
-        for (let l = 0; l <= num.layer; l++) {
+        str += mag.toFixed(2);
+        for (let l = 0; l <= layer; l++) {
             str += "</sup>";
         }
         return str;
     }
-    return "10 ↑↑ " + format(num.slog(10), decimal);
+    
+    let layer = num.layer + 1;
+    let mag = Math.log10(num.mag);
+    if (mag >= 10) {
+        layer++;
+        mag = Math.log10(mag);
+    }
+    return mag.toFixed(3) + "F" + layer;
+    
 }
